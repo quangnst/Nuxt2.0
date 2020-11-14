@@ -12,12 +12,14 @@ module.exports = {
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
-        rel: "stylesheet",
-        href:
-          "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"
+        rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css'
       }
     ]
   },
+  css: [
+    // '@/assets/css/main.scss'
+  ],
   /*
    ** Customize the progress bar color
    */
@@ -38,9 +40,9 @@ module.exports = {
           exclude: /(node_modules)/
         });
       }
-    }
+    },
+    transpile: ["vee-validate/dist/rules"]
   },
-
   axios: {
     baseURL: "http://localhost:8080/api"
   },
@@ -48,13 +50,15 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: "auth/signin", method: "post", propertyName: "data.token" },
-          user: { url: "test/user", method: "get", propertyName: "data" },
+          login: false,
+          user: false,
           logout: false
         }
       }
     }
   },
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth"]
+  plugins: ['~/plugins/persistedState.js', '~/plugins/vee-validate.js'],
+  modules: [
+    "@nuxtjs/axios", '@nuxtjs/auth'
+  ]
 };
-
